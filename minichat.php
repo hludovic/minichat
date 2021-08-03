@@ -4,8 +4,11 @@ try {
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
+$cookie_pseudo = '';
+if (isset($_COOKIE['pseudo'])) {
+    $cookie_pseudo = $_COOKIE['pseudo'];
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +24,7 @@ Entrez votre message.
     <table>
         <tr>
             <td>Pseudo : </td>
-            <td><input type="text" name="pseudo" id="pseudo"></td>
+            <td><input type="text" name="pseudo" id="pseudo" value="<?php echo $cookie_pseudo ?>"></td>
         </tr>
         <tr>
             <td>Message : </td>

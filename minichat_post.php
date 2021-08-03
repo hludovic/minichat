@@ -4,7 +4,14 @@ try {
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
-$request = $bdd->prepare('INSERT INTO `test`.`minichat` (`pseudo`, `message`) VALUES(?, ?)');
-$request->execute(array($_POST['pseudo'], $_POST['message']));
-header('Location: minichat.php');
+
+if (($_POST['pseudo'] != '') and ($_POST['message'] != '')) {
+    setcookie('pseudo', $_POST['pseudo'], time() + 3600);
+
+    $request = $bdd->prepare('INSERT INTO `test`.`minichat` (`pseudo`, `message`) VALUES(?, ?)');
+    $request->execute(array($_POST['pseudo'], $_POST['message']));
+    header('Location: minichat.php');
+} else {
+    header('Location: minichat.php');
+}
 ?>
