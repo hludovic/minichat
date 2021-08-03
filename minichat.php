@@ -38,11 +38,34 @@ Entrez votre message.
 </form>
 <br><br>
 <?php
-$response = $bdd->query('SELECT * FROM minichat ORDER BY id DESC LIMIT 0, 10');
-while ($data = $response->fetch()) {
+
+$range = 10;
+$startPage = 0;
+$page = 1;
+if (isset($_GET['page']) AND $_GET['page'] > 1 AND $page = (int)$_GET['page']) {
+    $startPage = $range * (htmlspecialchars($_GET['page']) - 1);
+}
+
+$request = $bdd->prepare('SELECT * FROM minichat ORDER BY id DESC LIMIT :start, :range');
+$request->bindValue('start', $startPage, PDO::PARAM_INT);
+$request->bindValue('range', $range, PDO::PARAM_INT);
+$request->execute();
+while ($data = $request->fetch()) {
     echo '<p><strong>' . htmlspecialchars($data['pseudo']) . ' : </strong>';
     echo htmlspecialchars($data['message']) . '</p>';
 }
 ?>
+<table>
+    <tr>
+        <td><a href="minichat.php?page=<?php echo $page - 1 ?>">◀️</a>   </td>
+        <td>   <a href="minichat.php">🔄</a>   </td></td>
+        <td>   <a href="minichat.php?page=<?php echo $page + 1 ?>">▶️</a></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Page <?php echo $page?></td>
+        <td></td>
+    </tr>
+</table>
 </body>
 </html>
