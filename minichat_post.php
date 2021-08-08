@@ -10,8 +10,8 @@ if (($_POST['pseudo'] != '') and ($_POST['message'] != '')) {
 
     $request = $bdd->prepare('INSERT INTO `test`.`minichat` (`pseudo`, `message`) VALUES(?, ?)');
     $request->execute(array($_POST['pseudo'], $_POST['message']));
-    header('Location: minichat.php');
+    header('Location: index.php');
 } else {
-    header('Location: minichat.php');
+    header('Location: index.php');
 }
 ?>

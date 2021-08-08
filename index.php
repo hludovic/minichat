@@ -57,9 +57,9 @@ while ($data = $request->fetch()) {
 ?>
 <table>
     <tr>
-        <td><a href="minichat.php?page=<?php echo $page - 1 ?>">◀️</a>   </td>
-        <td>   <a href="minichat.php">🔄</a>   </td></td>
-        <td>   <a href="minichat.php?page=<?php echo $page + 1 ?>">▶️</a></td>
+        <td><a href="index.php?page=<?php echo $page - 1 ?>">◀️</a>   </td>
+        <td>   <a href="index.php">🔄</a>   </td></td>
+        <td>   <a href="index.php?page=<?php echo $page + 1 ?>">▶️</a></td>
     </tr>
     <tr>
         <td></td>
